@@ -2,27 +2,37 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [num1, setNum1] = useState();
-  const [num2, setNum2] = useState();
+  const [num1, setNum1] = useState("0");
+  const [num2, setNum2] = useState("0");
   const [operator, setOperator] = useState();
   const [answer, setAnswer] = useState();
 
   const inputNum1 = (e) => {
-    const thisNum = Number(e.target.innerHTML);
+    let thisNum = e.target.innerHTML;
+
+    if (num1 !== "0") {
+      thisNum = num1 + thisNum;
+    }
+
     setNum1(thisNum);
   };
 
   const clearNum1 = () => {
-    setNum1(0);
+    setNum1("0");
   };
 
   const inputNum2 = (e) => {
-    const thisNum = Number(e.target.innerHTML);
+    let thisNum = e.target.innerHTML;
+
+    if (num2 !== "0") {
+      thisNum = num2 + thisNum;
+    }
+
     setNum2(thisNum);
   };
 
   const clearNum2 = () => {
-    setNum2(0);
+    setNum2("0");
   };
 
   const inputOperator = (e) => {
@@ -32,14 +42,17 @@ function App() {
 
   const getAnswer = () => {
     let thisAnswer;
+    const number1 = Number(num1);
+    const number2 = Number(num2);
+
     if (operator === "+") {
-      thisAnswer = num1 + num2;
+      thisAnswer = number1 + number2;
     } else if (operator === "-") {
-      thisAnswer = num1 - num2;
+      thisAnswer = number1 - number2;
     } else if (operator === "*") {
-      thisAnswer = num1 * num2;
+      thisAnswer = number1 * number2;
     } else {
-      thisAnswer = num1 / num2;
+      thisAnswer = number1 / number2;
     }
     setAnswer(thisAnswer);
   };
@@ -93,6 +106,7 @@ function App() {
         <p>{answer}</p>
         <div>
           <button onClick={getAnswer}>=</button>
+          <button>Store</button>
         </div>
       </div>
     </div>
