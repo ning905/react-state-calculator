@@ -6,11 +6,16 @@ function App() {
   const [num2, setNum2] = useState("0");
   const [operator, setOperator] = useState();
   const [answer, setAnswer] = useState();
+  const [storedAnswer, setStoredAnswer] = useState();
 
   const inputNum1 = (e) => {
     let thisNum = e.target.innerHTML;
 
-    if (num1 !== "0") {
+    if (thisNum === "." && num1.includes(".")) {
+      return;
+    }
+
+    if (num1 !== "0" || thisNum === ".") {
       thisNum = num1 + thisNum;
     }
 
@@ -24,7 +29,11 @@ function App() {
   const inputNum2 = (e) => {
     let thisNum = e.target.innerHTML;
 
-    if (num2 !== "0") {
+    if (thisNum === "." && num2.includes(".")) {
+      return;
+    }
+
+    if (num2 !== "0" || thisNum === ".") {
       thisNum = num2 + thisNum;
     }
 
@@ -57,6 +66,18 @@ function App() {
     setAnswer(thisAnswer);
   };
 
+  const storeAnswer = () => {
+    setStoredAnswer(answer);
+  };
+
+  const num1RecallAnswer = () => {
+    setNum1(storedAnswer);
+  };
+
+  const num2RecallAnswer = () => {
+    setNum2(storedAnswer);
+  };
+
   return (
     <div className="calculator">
       <div className="panel">
@@ -72,7 +93,9 @@ function App() {
           <button onClick={inputNum1}>8</button>
           <button onClick={inputNum1}>9</button>
           <button onClick={inputNum1}>0</button>
+          <button onClick={inputNum1}>.</button>
           <button onClick={clearNum1}>Clear</button>
+          <button onClick={num1RecallAnswer}>Recall</button>
         </div>
       </div>
 
@@ -99,14 +122,16 @@ function App() {
           <button onClick={inputNum2}>8</button>
           <button onClick={inputNum2}>9</button>
           <button onClick={inputNum2}>0</button>
+          <button onClick={inputNum2}>.</button>
           <button onClick={clearNum2}>Clear</button>
+          <button onClick={num2RecallAnswer}>Recall</button>
         </div>
       </div>
       <div className="panel answer">
         <p>{answer}</p>
         <div>
           <button onClick={getAnswer}>=</button>
-          <button>Store</button>
+          <button onClick={storeAnswer}>Store</button>
         </div>
       </div>
     </div>
