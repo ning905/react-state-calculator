@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { Panel } from "./Panel";
 
 function App() {
   const [num1, setNum1] = useState("0");
@@ -80,53 +81,31 @@ function App() {
 
   return (
     <div className="calculator">
-      <div className="panel">
-        <p>{num1}</p>
-        <div className="numbers">
-          <button onClick={inputNum1}>1</button>
-          <button onClick={inputNum1}>2</button>
-          <button onClick={inputNum1}>3</button>
-          <button onClick={inputNum1}>4</button>
-          <button onClick={inputNum1}>5</button>
-          <button onClick={inputNum1}>6</button>
-          <button onClick={inputNum1}>7</button>
-          <button onClick={inputNum1}>8</button>
-          <button onClick={inputNum1}>9</button>
-          <button onClick={inputNum1}>0</button>
-          <button onClick={inputNum1}>.</button>
-          <button onClick={clearNum1}>Clear</button>
-          <button onClick={num1RecallAnswer}>Recall</button>
-        </div>
-      </div>
+      <Panel
+        variable={num1}
+        inputFunction={inputNum1}
+        clearFunction={clearNum1}
+        recallFunction={num1RecallAnswer}
+        numbers={["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."]}
+        operator={false}
+      />
 
-      <div className="panel">
-        <p>{operator}</p>
-        <div className="numbers">
-          <button onClick={inputOperator}>+</button>
-          <button onClick={inputOperator}>-</button>
-          <button onClick={inputOperator}>*</button>
-          <button onClick={inputOperator}>÷</button>
-        </div>
-      </div>
+      <Panel
+        variable={operator}
+        inputFunction={inputOperator}
+        numbers={["+", "-", "*", "÷"]}
+        operator={true}
+      />
 
-      <div className="panel">
-        <p>{num2}</p>
-        <div className="numbers">
-          <button onClick={inputNum2}>1</button>
-          <button onClick={inputNum2}>2</button>
-          <button onClick={inputNum2}>3</button>
-          <button onClick={inputNum2}>4</button>
-          <button onClick={inputNum2}>5</button>
-          <button onClick={inputNum2}>6</button>
-          <button onClick={inputNum2}>7</button>
-          <button onClick={inputNum2}>8</button>
-          <button onClick={inputNum2}>9</button>
-          <button onClick={inputNum2}>0</button>
-          <button onClick={inputNum2}>.</button>
-          <button onClick={clearNum2}>Clear</button>
-          <button onClick={num2RecallAnswer}>Recall</button>
-        </div>
-      </div>
+      <Panel
+        variable={num2}
+        inputFunction={inputNum2}
+        clearFunction={clearNum2}
+        recallFunction={num2RecallAnswer}
+        numbers={["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."]}
+        operator={false}
+      />
+
       <div className="panel answer">
         <p>{answer}</p>
         <div>
